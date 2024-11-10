@@ -9,17 +9,28 @@ import { AuthService } from '../services/auth.service';
 })
 export class GamesComponent implements OnInit {
 
-  games: Game[];
+  games!: Game[];
 
   constructor(private gameService: GameService, public authService : AuthService) {
-    this.games = gameService.listeGame();
+    // this.games = gameService.listeGame();
   }
-  ngOnInit() {
-  }
-
-  supprimerGame(g: Game) {
+  
+  ngOnInit(): void {
+    this.chargerGames();
+    }
+    chargerGames(){
+    this.gameService.listeGame().subscribe(games => {
+    console.log(games);
+    this.games = games;
+    });
+    }
+    supprimerGame(g: Game)
+    {
     let conf = confirm("Etes-vous sûr ?");
     if (conf)
-      this.gameService.supprimerGame(g);
-  }
+    this.gameService.supprimerGame(g.idGame).subscribe(() => {
+    console.log("game supprimé");
+    this.chargerGames();
+    });
+    } 
 }

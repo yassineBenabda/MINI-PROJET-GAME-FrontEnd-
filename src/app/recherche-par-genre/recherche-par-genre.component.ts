@@ -16,19 +16,19 @@ export class RechercheParGenreComponent {
   constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
-    this.genres = this.gameService.listeGenres();
+    //this.genres = this.gameService.listeGenres();
     this.games = [];
   }
 
   onChange() {
-    this.games = this.gameService.rechercherParGenre(this.IdGenre);
+    //this.games = this.gameService.rechercherParGenre(this.IdGenre);
   }
 
   supprimerGame(g: Game) {
     let conf = confirm("Etes-vous sûr ?");
     if (conf) {
-      this.gameService.supprimerGame(g);
-      this.games = this.gameService.rechercherParGenre(this.IdGenre);
+      //this.gameService.supprimerGame(g);
+      //this.games = this.gameService.rechercherParGenre(this.IdGenre);
     }
   }
 }

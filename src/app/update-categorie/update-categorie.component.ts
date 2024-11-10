@@ -19,9 +19,9 @@ export class UpdateCategorieComponent implements OnInit{
   
   constructor() {}
   ngOnInit(): void {
-    console.log("ngOnInit du composant UpdateGenre ",this.genre);
+    //console.log("ngOnInit du composant UpdateGenre ",this.genre);
   }
   saveGenre() {
-    this.genreUpdated.emit(this.genre);
+    //this.genreUpdated.emit(this.genre);
   }
 }

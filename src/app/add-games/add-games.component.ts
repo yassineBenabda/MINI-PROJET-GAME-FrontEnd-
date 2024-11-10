@@ -21,21 +21,28 @@ export class AddGamesComponent {
     private router: Router,
     private formBuilder: FormBuilder) { }
 
-  ngOnInit() {
-    this.genres = this.gameService.listeGenres();
-    this.myForm = this.formBuilder.group({
+  
+    ngOnInit(): void {
+      this.gameService.listeGenres().
+      subscribe(genres => {this.genres = genres;
+      console.log(genres);
+      });
+      
+    
+     this.myForm = this.formBuilder.group({
       idGame: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       nomGame: ['', [Validators.required, Validators.minLength(5)]],
       prixGame: ['', [Validators.required, Validators.min(0)]],
       datedeSortie: ['', [Validators.required]],
-      genre: ['', [Validators.required]]
+      genre: ['', [Validators.required]] 
     });
   }
-  addGame() {
-    this.newGenre = this.gameService.consulterGenre(this.newIdGenre);
-    this.newGame.genre = this.newGenre;
-    this.gameService.ajouterGame(this.newGame);
+  addGame(){
+    this.newGame.genre = this.genres.find(genre => genre.idGenre == this.newIdGenre)!;
+    this.gameService.ajouterGame(this.newGame).subscribe(game => {
+    console.log(game);
     this.router.navigate(['games']);
-  }
+    });
+    } 
 }

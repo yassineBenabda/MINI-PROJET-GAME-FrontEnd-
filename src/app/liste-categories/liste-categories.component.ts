@@ -16,18 +16,18 @@ export class ListeCategoriesComponent implements OnInit {
   constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
-    this.chargerGenres();
+    //this.chargerGenres();
   }
   chargerGenres() {
-    this.genres = this.gameService.listeGenres();
+    //this.genres = this.gameService.listeGenres();
   }
   genreUpdated(gen: Genre) {
-    this.gameService.ajouterGenre(gen);
-    this.chargerGenres();
+    //this.gameService.ajouterGenre(gen);
+    //this.chargerGenres();
   }
 
   editGenre(gen: Genre) {
-    this.updatedGen = gen;
-    this.ajout=false;
+    //this.updatedGen = gen;
+    //this.ajout=false;
   }
 }
