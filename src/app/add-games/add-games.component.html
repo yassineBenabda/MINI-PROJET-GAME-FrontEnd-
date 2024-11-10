@@ -1,0 +1,80 @@
+<div class="container">
+  <div>
+    <h2>Ajouter une Game :</h2>
+  </div>
+  <form [formGroup]="myForm">
+
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>ID Game</label>
+      <input type="text" formControlName="idGame" [(ngModel)]="newGame.idGame" name="idGame" class="form-control">
+    </div>
+    <span *ngIf="myForm.controls['idGame'].hasError('required')&& myForm.controls['idGame'].touched"
+      class="text-danger">
+      id Game est obligatoire
+    </span>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Nom Game</label>
+      <input type="text" formControlName="nomGame" [(ngModel)]="newGame.nomGame" name="nomGame" class="form-control">
+    </div> <span *ngIf="myForm.controls['nomGame'].hasError('required')&& myForm.controls['nomGame'].touched"
+      class="text-danger">
+      Nom de Game est obligatoire
+    </span>
+    <span *ngIf="myForm.controls['nomGame'].hasError('minlength')&& myForm.controls['nomGame'].touched"
+      class="text-danger">
+      le nom de Game doit contenir au moins 5 caractères
+    </span>
+
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Prix Game</label>
+      <input type="number" formControlName="prixGame" [(ngModel)]="newGame.prixGame" name="prixGame"
+        class="form-control">
+    </div>
+    <span *ngIf="myForm.controls['prixGame'].hasError('required')&& myForm.controls['prixGame'].touched"
+      class="text-danger">
+      le prix de Game est obligatoire
+    </span>
+    <span *ngIf="myForm.controls['prixGame'].hasError('min') && myForm.controls['prixGame'].touched"
+      class="text-danger">
+      Le prix de Game doit être supérieur ou égal à 0
+    </span>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Date création</label>
+      <input type="date" formControlName="datedeSortie" [(ngModel)]="newGame.datedeSortie" name="datedeSortie"
+        class="form-control">
+    </div>
+    <span *ngIf="myForm.controls['datedeSortie'].hasError('required')&& myForm.controls['datedeSortie'].touched"
+      class="text-danger">
+      la date de création de Game est obligatoire
+    </span>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>email :</label>
+      <input type="text" name="email" class="form-control" formControlName="email" [(ngModel)]="newGame.email">
+    </div>
+    <span *ngIf="myForm.controls['email'].hasError('required')&&  myForm.controls['email'].touched" class="text-danger">
+      email est obligatoire
+    </span>
+    <span *ngIf="myForm.controls['email'].hasError('email')&&  myForm.controls['email'].touched" class="text-danger">
+      email non valide
+    </span>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>genre</label>
+      <select class="form-control form-control-lg" id="idgenre" name="idgenre" formControlName="genre"
+        [(ngModel)]="newIdGenre">
+        <option *ngFor="let genre of genres" [value]="genre.idGenre">
+          {{genre.nomGenre}}
+        </option>
+      </select>
+      <span *ngIf="myForm.controls['genre'].hasError('required')&& myForm.controls['genre'].touched"
+        class="text-danger">
+        La genre de Game est obligatoire
+      </span>
+    </div>
+
+    <div class="mt-2">
+      <button type="submit" [disabled]="myForm.invalid" (click)="addGame()" class="btn btn-success">Ajouter</button>
+    </div>
+  </form>
+</div>

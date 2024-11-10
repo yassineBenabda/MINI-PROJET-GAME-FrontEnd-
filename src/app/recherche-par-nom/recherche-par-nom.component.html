@@ -1,0 +1,32 @@
+<div class="container">
+    <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+            <label>Recherche par nom</label>
+            <input #nom [(ngModel)]="searchTerm" name="searchTerm" class="form-control">
+        </div>
+    </form>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>DatedeSortie</th>
+                    <th>Genre</th>
+                </tr>
+                <tbody *ngFor="let game of games | searchFilter: searchTerm ">
+                    <tr>
+                        <td>{{game.idGame}}</td>
+                        <td>{{game.nomGame}}</td>
+                        <td>{{game.prixGame}}</td>
+                        <td>{{game.datedeSortie | date:'dd/MM/yyyy'}}</td>
+                        <td>{{game.genre.nomGenre}}</td>
+                        <td><a class="btn btn-danger" (click)="supprimerGame(game)">Supprimer</a></td>
+                        <td><a class="btn btn-success" [routerLink]="['/updateGame',game.idGame]">Modifier</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

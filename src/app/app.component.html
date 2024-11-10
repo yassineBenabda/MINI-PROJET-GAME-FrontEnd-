@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Gestion des Games</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Gestion des Games</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li> -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Games
+              </a>
+              <ul class="dropdown-menu">
+                <li><a *ngIf="authService.isAdmin()" class="dropdown-item" routerLink="/add-games">Ajouter</a></li>
+                <li><a class="dropdown-item" href="#">Lister</a></li>
+                <li><a class="dropdown-item" routerLink="/recherche-par-genre" >Recherche Par Genre</a></li>
+                <li><a class="dropdown-item" routerLink="/recherche-par-nom" >Recherche Par Nom</a></li>
+                <li><a class="dropdown-item" routerLink="/listeCategories" >Liste Des Genres</a></li>
+              </ul>
+            </li>
+            <li> <a class="nav-link">{{authService.loggedUser}}</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Connexion
+              </a>
+                <ul class="dropdown-menu">
+                  <li><a *ngIf="!authService.isloggedIn" class="dropdown-item" routerLink="login">login</a></li>
+                  <li><a *ngIf="authService.isloggedIn" class="dropdown-item" (click) = "onLogout()">logout</a></li>
+                  <li><a class="dropdown-item" href="#">Profile</a></li>
+                </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>
+<router-outlet></router-outlet>
