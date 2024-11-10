@@ -16,7 +16,7 @@
                         <td>{{game.nomGame}}</td>
                         <td>{{game.prixGame}}</td>
                         <td>{{game.datedeSortie | date:'dd/MM/yyyy'}}</td>
-                        <td>{{game.genre?.nomGenre}}</td>
+                        <td>{{game.genre.nomGenre}}</td>
                         <td>{{game.email}}</td>
                         <td><a *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="supprimerGame(game)">Supprimer</a></td>
                         <td><a *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/updateGame',game.idGame]">Modifier</a></td>

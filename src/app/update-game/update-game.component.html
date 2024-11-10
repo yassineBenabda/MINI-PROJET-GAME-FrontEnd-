@@ -46,7 +46,7 @@ myForm.controls['nomGame'].touched" class="text-danger">
       class="text-danger">
       la date de création de Game est obligatoire
     </span>
-   <div class="col-sm-4 col-md-4 col-lg-4">
+    <div class="col-sm-4 col-md-4 col-lg-4">
       <label>email :</label>
       <input type="text" name="email" class="form-control" formControlName="email" [(ngModel)]="currentGame.email">
     </div>
@@ -70,7 +70,7 @@ myForm.controls['nomGame'].touched" class="text-danger">
     </span>
 
     <div class="mt-2">
-      <button type="submit" [disabled]="myForm.invalid" (click)="updateGame()" class="btn btn-success">Modifer</button>
+      <button type="submit"  (click)="updateGame()" class="btn btn-success">Modifer</button>
     </div>
   </form>
 </div>

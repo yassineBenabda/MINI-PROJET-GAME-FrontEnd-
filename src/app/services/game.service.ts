@@ -3,6 +3,8 @@ import { Game } from '../model/game.model';
 import { Genre } from '../model/genre.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { apiURL, apiURLGenre } from '../config';
+import { GenreWrapper } from '../model/genre.Wrapped.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,54 +14,41 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class GameService {
-  apiURL: string = 'http://localhost:8080/games/api';
-
-
 
   games!: Game[];
-  /* genres! : Genre[];
-  gamesRecherche!: Game[]; */
+  genres! : Genre[];
+  //gamesRecherche!: Game[]; 
 
-  constructor(private http: HttpClient) {
-
-    /* this.genres = [
-      { idGenre: 1, nomGenre: "RPG" },
-      { idGenre: 2, nomGenre: "Fighting" },
-      { idGenre: 3, nomGenre: "Action" }
-    ]; */
-    /* this.games = [
-      { idGame: 1, nomGame: "Elden Ring", prixGame: 39.99, datedeSortie: new Date("06/24/2022"), genre: { idGenre: 1, nomGenre: "RPG" }, email: "customerservice@bntca.com", enable: false },
-      { idGame: 2, nomGame: "Tekken 7", prixGame: 24.99, datedeSortie: new Date("01/01/2017"), genre: { idGenre: 2, nomGenre: "Fighting" }, email: "customerservice@bntca.com", enable: false },
-      { idGame: 3, nomGame: "Far Cry 3", prixGame: 15.99, datedeSortie: new Date("11/29/2012"), genre: { idGenre: 3, nomGenre: "Action" }, email: "farcrybanduk@gmail.com", enable: false }
-    ]; */
-  }
-
-
+  constructor(private http: HttpClient) {}
 
   listeGame(): Observable<Game[]> {
-    return this.http.get<Game[]>(this.apiURL);
+    return this.http.get<Game[]>(apiURL);
   }
 
   ajouterGame(game: Game): Observable<Game> {
-    return this.http.post<Game>(this.apiURL, game, httpOptions);
+    return this.http.post<Game>(apiURL, game, httpOptions);
   }
 
   supprimerGame(id: number) {
-    const url = `${this.apiURL}/${id}`;
+    const url = `${apiURL}/${id}`;
     return this.http.delete(url, httpOptions);
   }
 
   consulterGame(id: number): Observable<Game> {
-    const url = `${this.apiURL}/${id}`;
+    const url = `${apiURL}/${id}`;
     return this.http.get<Game>(url);
   }
 
   updateGame(game: Game): Observable<Game> {
-    return this.http.put<Game>(this.apiURL, game, httpOptions);
+    return this.http.put<Game>(apiURL, game, httpOptions);
   }
 
-  listeGenres():Observable<Genre[]>{
-    return this.http.get<Genre[]>(this.apiURL+"/genre");
+  /* listeGenres():Observable<Genre[]>{
+    return this.http.get<Genre[]>(apiURL+"/genre");
+  } */
+
+  listeGenres():Observable<GenreWrapper>{
+    return this.http.get<GenreWrapper>(apiURLGenre);
   }
 
   trierGames() {

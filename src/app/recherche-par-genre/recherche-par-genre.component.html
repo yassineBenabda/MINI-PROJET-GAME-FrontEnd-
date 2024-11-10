@@ -1,8 +1,7 @@
 <div class="container">
     <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
         <label>Recherche par genre</label>
-        <select class="form-control form-control-lg" id="idGenre" name="idGenre" [(ngModel)]="IdGenre"
-            (change)="onChange()">
+        <select class="form-control form-control-lg" id="idGenre" name="idGenre" [(ngModel)]="IdGenre">
             <option *ngFor="let genre of genres" value="{{genre.idGenre}}">
                 {{genre.nomGenre}}
             </option>

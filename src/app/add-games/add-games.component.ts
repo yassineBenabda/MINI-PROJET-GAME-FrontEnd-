@@ -24,10 +24,9 @@ export class AddGamesComponent {
   
     ngOnInit(): void {
       this.gameService.listeGenres().
-      subscribe(genres => {this.genres = genres;
-      console.log(genres);
+      subscribe(genres => {console.log(genres);
+      this.genres = genres._embedded.genres;
       });
-      
     
      this.myForm = this.formBuilder.group({
       idGame: ['', [Validators.required]],

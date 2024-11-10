@@ -18,14 +18,20 @@ export class RechercheParNomComponent {
   constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
-   // this.games = this.gameService.listeGame();
+    this.chargerGames();
   }
-
+  chargerGames() {
+    this.gameService.listeGame().subscribe(games => {
+      console.log(games);
+      this.games = games;
+    });
+  }
   supprimerGame(g: Game) {
     let conf = confirm("Etes-vous sûr ?");
-    if (conf) {
-      //this.gameService.supprimerGame(g);
-      //this.games = this.gameService.rechercherParGenre(this.IdGenre);
-    }
+    if (conf)
+      this.gameService.supprimerGame(g.idGame).subscribe(() => {
+        console.log("game supprimé");
+        this.chargerGames();
+      });
   }
 }

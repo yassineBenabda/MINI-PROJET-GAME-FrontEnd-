@@ -21,12 +21,13 @@ export class UpdateGameComponent {
     private gameService: GameService,
     private formBuilder: FormBuilder) { }
 
-  ngOnInit(): void {
-    this.gameService.listeGenres().
-      subscribe(genres => {
-        this.genres = genres;
-        console.log(genres);
-      });
+
+    ngOnInit(): void {
+      this.gameService.listeGenres().
+      subscribe(genres => {console.log(genres);
+      this.genres = genres._embedded.genres;
+      }
+      );
     this.gameService.consulterGame(this.activatedRoute.snapshot.params['id']).subscribe(game => {
       this.currentGame = game;
       this.updatedGenreId = this.currentGame.genre.idGenre;
