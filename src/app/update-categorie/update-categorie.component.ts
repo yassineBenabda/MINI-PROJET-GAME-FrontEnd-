@@ -6,22 +6,25 @@ import { Genre } from '../model/genre.model';
   templateUrl: './update-categorie.component.html',
   styles: ``
 })
-export class UpdateCategorieComponent implements OnInit{
+export class UpdateCategorieComponent implements OnInit {
 
   @Input()
-  genre! : Genre;
+  genre!: Genre;
 
   @Output()
   genreUpdated = new EventEmitter<Genre>();
 
   @Input()
-  ajout!:boolean;
-  
-  constructor() {}
+  ajout!: boolean;
+
+  constructor() { }
+
   ngOnInit(): void {
-    //console.log("ngOnInit du composant UpdateGenre ",this.genre);
+    console.log("ngOnInit du composant UpdateCategorie ", this.genre);
   }
+
   saveGenre() {
-    //this.genreUpdated.emit(this.genre);
+    this.genreUpdated.emit(this.genre);
   }
+
 }

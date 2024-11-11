@@ -57,6 +57,10 @@ export class GameService {
     return this.http.get<Game[]>(url);
   } */
   
+  ajouterGenre( genre: Genre):Observable<Genre>{
+    return this.http.post<Genre>(apiURLGenre, genre, httpOptions);
+  }
+
   trierGames() {
     this.games = this.games.sort((n1, n2) => {
       if (n1.idGame! > n2.idGame!) {
