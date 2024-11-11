@@ -52,10 +52,10 @@ export class GameService {
     return this.http.get<Game[]>(url);
   }
 
-  rechercherParNom(nom: string):Observable< Game[]> {
+  /* rechercherParNom(nom: string):Observable< Game[]> {
     const url = `${apiURL}/gamesByName/${nom}`;
     return this.http.get<Game[]>(url);
-  }
+  } */
   
   trierGames() {
     this.games = this.games.sort((n1, n2) => {
