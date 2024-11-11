@@ -2,7 +2,8 @@
     <form class="form-inline">
         <div class="form-group mx-sm-3 mb-2 mt-2 ">
             <label>Recherche par nom</label>
-            <input #nom [(ngModel)]="searchTerm" name="searchTerm" class="form-control">
+            <input type="text" class="form-control" [(ngModel)]="nomGame" name="nomProduit" class="form-control">
+            <button type="submit" (click)="rechercherGames()" class="btn btn-primary mb-2 ml-2">Rechercher</button>
         </div>
     </form>
     <div class="card shadow mb-4">
@@ -15,15 +16,15 @@
                     <th>DatedeSortie</th>
                     <th>Genre</th>
                 </tr>
-                <tbody *ngFor="let game of games | searchFilter: searchTerm ">
+                <tbody *ngFor="let game of games">
                     <tr>
                         <td>{{game.idGame}}</td>
                         <td>{{game.nomGame}}</td>
                         <td>{{game.prixGame}}</td>
                         <td>{{game.datedeSortie | date:'dd/MM/yyyy'}}</td>
-                        <td>{{game.genre.nomGenre}}</td>
-                        <td><a class="btn btn-danger" (click)="supprimerGame(game)">Supprimer</a></td>
-                        <td><a class="btn btn-success" [routerLink]="['/updateGame',game.idGame]">Modifier</a></td>
+                        <td>{{game.genre?.nomGenre}}</td>
+                        <!-- <td><a class="btn btn-danger" (click)="supprimerGame(game)">Supprimer</a></td>
+                        <td><a class="btn btn-success" [routerLink]="['/updateGame',game.idGame]">Modifier</a></td> -->
                     </tr>
                 </tbody>
             </table>

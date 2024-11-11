@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Game } from '../model/game.model';
 import { Genre } from '../model/genre.model';
 import { GameService } from '../services/game.service';
@@ -7,7 +7,7 @@ import { GameService } from '../services/game.service';
   selector: 'app-recherche-par-genre',
   templateUrl: './recherche-par-genre.component.html'
 })
-export class RechercheParGenreComponent {
+export class RechercheParGenreComponent implements OnInit{
 
   games!: Game[];
   genres!: Genre[];
@@ -16,21 +16,18 @@ export class RechercheParGenreComponent {
   constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
-    this.chargerGames();
-  }
-  chargerGames() {
-    this.gameService.listeGame().subscribe(games => {
-      console.log(games);
-      this.games = games;
-    });
-  }
-
-  supprimerGame(g: Game) {
-    let conf = confirm("Etes-vous sûr ?");
-    if (conf)
-      this.gameService.supprimerGame(g.idGame).subscribe(() => {
-        console.log("game supprimé");
-        this.chargerGames();
+    
+    this.gameService.listeGenres().
+      subscribe(genres => {
+        this.genres = genres._embedded.genres;
+        console.log(genres);
       });
   }
+
+  onChange() {
+    this.gameService.rechercherParCategorie(this.IdGenre).
+      subscribe(games => { this.games = games });
+  }
+  
+ 
 }

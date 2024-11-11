@@ -11,9 +11,7 @@ export class GamesComponent implements OnInit {
 
   games!: Game[];
 
-  constructor(private gameService: GameService, public authService : AuthService) {
-    // this.games = gameService.listeGame();
-  }
+  constructor(private gameService: GameService, public authService : AuthService) {}
   
   ngOnInit(): void {
     this.chargerGames();

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
         <label>Recherche par genre</label>
-        <select class="form-control form-control-lg" id="idGenre" name="idGenre" [(ngModel)]="IdGenre">
+        <select class="form-control form-control-lg" id="idGenre" name="idGenre" [(ngModel)]="IdGenre" (change)="onChange()">
             <option *ngFor="let genre of genres" value="{{genre.idGenre}}">
                 {{genre.nomGenre}}
             </option>
@@ -24,8 +24,8 @@
                         <td>{{game.prixGame}}</td>
                         <td>{{game.datedeSortie | date:'dd/MM/yyyy'}}</td>
                         <td>{{game.genre.nomGenre}}</td>
-                        <td><a class="btn btn-danger" (click)="supprimerGame(game)">Supprimer</a></td>
-                        <td><a class="btn btn-success" [routerLink]="['/updateGame',game.idGame]">Modifier</a></td>
+                        <!-- <td><a class="btn btn-danger" (click)="supprimerGame(game)">Supprimer</a></td>
+                        <td><a class="btn btn-success" [routerLink]="['/updateGame',game.idGame]">Modifier</a></td> -->
                     </tr>
                 </tbody>
             </table>

@@ -17,7 +17,7 @@ export class GameService {
 
   games!: Game[];
   genres! : Genre[];
-  //gamesRecherche!: Game[]; 
+  gamesRecherche!: Game[]; 
 
   constructor(private http: HttpClient) {}
 
@@ -43,14 +43,20 @@ export class GameService {
     return this.http.put<Game>(apiURL, game, httpOptions);
   }
 
-  /* listeGenres():Observable<Genre[]>{
-    return this.http.get<Genre[]>(apiURL+"/genre");
-  } */
-
   listeGenres():Observable<GenreWrapper>{
     return this.http.get<GenreWrapper>(apiURLGenre);
   }
 
+  rechercherParCategorie(idGenre: number):Observable< Game[]> {
+    const url = `${apiURL}/gamesgenre/${idGenre}`;
+    return this.http.get<Game[]>(url);
+  }
+
+  rechercherParNom(nom: string):Observable< Game[]> {
+    const url = `${apiURL}/gamesByName/${nom}`;
+    return this.http.get<Game[]>(url);
+  }
+  
   trierGames() {
     this.games = this.games.sort((n1, n2) => {
       if (n1.idGame! > n2.idGame!) {
@@ -62,30 +68,4 @@ export class GameService {
       return 0;
     });
   }
-
-
-
-  
-/*
-  consulterGenre(id: number): Genre {
-    return this.genres.find(genre => genre.idGenre == id)!;
-  }
-
-  rechercherParGenre(idGenre: number): Game[] {
-    this.gamesRecherche = [];
-
-    this.games.forEach((cur, index) => {
-      if (idGenre == cur.genre.idGenre) {
-        console.log("cur " + cur);
-        this.gamesRecherche.push(cur);
-      }
-    });
-
-    return this.gamesRecherche;
-  }
-
-  ajouterGenre(g: Genre) {
-    this.genres.push(g);
-    console.log(this.genres);
-  } */
 }
