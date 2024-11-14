@@ -2,11 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Genre } from '../model/genre.model';
 
 @Component({
-  selector: 'app-update-categorie',
-  templateUrl: './update-categorie.component.html',
-  styles: ``
+  selector: 'app-update-genres',
+  templateUrl: './update-genres.component.html'
 })
-export class UpdateCategorieComponent implements OnInit {
+export class UpdateGenresComponent implements OnInit {
 
   @Input()
   genre!: Genre;
@@ -17,7 +16,7 @@ export class UpdateCategorieComponent implements OnInit {
   @Input()
   ajout!: boolean;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     console.log("ngOnInit du composant UpdateCategorie ", this.genre);

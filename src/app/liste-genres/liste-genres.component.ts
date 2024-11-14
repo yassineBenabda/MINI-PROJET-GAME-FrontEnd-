@@ -3,11 +3,10 @@ import { Genre } from '../model/genre.model';
 import { GameService } from '../services/game.service';
 
 @Component({
-  selector: 'app-liste-categories',
-  templateUrl: './liste-categories.component.html',
-  styles: ``
+  selector: 'app-liste-genres',
+  templateUrl: './liste-genres.component.html'
 })
-export class ListeCategoriesComponent implements OnInit {
+export class ListeGenresComponent implements OnInit {
 
 
   genres!: Genre[];
@@ -35,7 +34,7 @@ export class ListeCategoriesComponent implements OnInit {
 
   updateGenre(genre: Genre) {
     this.updatedGenre = genre;
-    this.ajout=false;
+    this.ajout = false;
   }
 
 }

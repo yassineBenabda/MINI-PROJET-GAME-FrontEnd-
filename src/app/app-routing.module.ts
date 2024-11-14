@@ -8,7 +8,7 @@ import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { GameGuard } from './game.guard';
-import { ListeCategoriesComponent } from './liste-categories/liste-categories.component';
+import { ListeGenresComponent } from './liste-genres/liste-genres.component';
 
 
 const routes: Routes = [
@@ -19,7 +19,7 @@ const routes: Routes = [
   { path : "recherche-par-nom" , component : RechercheParNomComponent },
   { path : "login" , component : LoginComponent },
   { path : "app-forbidden" , component :  ForbiddenComponent },
-  { path: "listeCategories", component : ListeCategoriesComponent },
+  { path: "liste-genres", component :  ListeGenresComponent},
   { path : "" , redirectTo : "games" , pathMatch : "full" }
 ];
 
