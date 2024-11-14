@@ -24,8 +24,7 @@ export class GamesComponent implements OnInit {
     }
     supprimerGame(g: Game)
     {
-    let conf = confirm("Etes-vous sûr ?");
-    if (conf)
+   
     this.gameService.supprimerGame(g.idGame).subscribe(() => {
     console.log("game supprimé");
     this.chargerGames();
