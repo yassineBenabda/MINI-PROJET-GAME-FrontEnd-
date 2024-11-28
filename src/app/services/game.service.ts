@@ -24,10 +24,7 @@ export class GameService {
     private authService : AuthService) { }
 
   listeGame(): Observable<Game[]> {
-    let jwt = this.authService.getToken();
-    jwt = "Bearer "+jwt;
-    let httpHeaders = new HttpHeaders({"Authorization":jwt})
-    return this.http.get<Game[]>(apiURL+"/all",{headers:httpHeaders});
+    return this.http.get<Game[]>(apiURL+"/all");
   }
 
   ajouterGame(game: Game): Observable<Game> {
