@@ -25,9 +25,7 @@ export class RechercheParGenreComponent implements OnInit{
   }
 
   onChange() {
-    this.gameService.rechercherParCategorie(this.IdGenre).
+    this.gameService.rechercherParGenre(this.IdGenre).
       subscribe(games => { this.games = games });
   }
-  
- 
 }
