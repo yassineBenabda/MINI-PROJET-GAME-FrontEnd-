@@ -1,23 +1,15 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class GameGuard implements CanActivate {
- 
-  constructor (private authService: AuthService,
-    private router : Router) {}
+export const GameGuard: CanActivateFn = () => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
 
-  canActivate(route: ActivatedRouteSnapshot,
-              state: RouterStateSnapshot): boolean {
-    if (this.authService.isAdmin())
-      return true;
-    else {
-      this.router.navigate(['app-forbidden']);
-      return false;
-    }
+  if (authService.isAdmin()) {
+    return true;
+  } else {
+    router.navigate(['forbidden']);
+    return false;
   }
-}
+};

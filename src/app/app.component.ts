@@ -1,26 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
   title = 'MesProduits';
 
-  constructor(public authService: AuthService,
-              private router :Router){}
+  constructor(public authService: AuthService, private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.authService.loadToken();
-    if (this.authService.getToken()==null || 
-        this.authService.isTokenExpired())
-          this.router.navigate(['/login']);
 
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+    }
   }
 
-  onLogout(){
+  onLogout(): void {
     this.authService.logout();
   }
 }

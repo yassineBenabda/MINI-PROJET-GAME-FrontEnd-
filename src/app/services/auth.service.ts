@@ -1,115 +1,80 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { User } from '../model/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
-
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { User } from '../model/user.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  private apiURL = 'http://localhost:8081/users';
+  private helper = new JwtHelperService();
 
-/*  users: User[] = [{"username":"admin","password":"123","roles":['ADMIN']},
-                   {"username":"nadhem","password":"123","roles":['USER']} ]; */
+  private tokenSubject = new BehaviorSubject<string | null>(null);
+  private rolesSubject = new BehaviorSubject<string[]>([]);
+  private loggedUserSubject = new BehaviorSubject<string | null>(null);
 
- private helper = new JwtHelperService();
+  token$ = this.tokenSubject.asObservable();
+  roles$ = this.rolesSubject.asObservable();
+  loggedUser$ = this.loggedUserSubject.asObservable();
 
-apiURL: string = 'http://localhost:8081/users';
-token!:string;
+  isAdmin$: Observable<boolean> = this.roles$.pipe(
+    map((roles) => roles.includes('ADMIN'))
+  );
 
-public loggedUser!:string;
-public isloggedIn: Boolean = false;
-public roles!:string[];
+  constructor(private http: HttpClient, private router: Router) {}
 
-  constructor(private router : Router,
-              private http : HttpClient
-) { }
-
-  login(user : User)
-  {
-  return this.http.post<User>(this.apiURL+'/login', user , {observe:'response'});
-  }
- 
- saveToken(jwt:string){
-      localStorage.setItem('jwt',jwt);
-      this.token = jwt;
-      this.isloggedIn = true; 
-      this.decodeJWT();
-  }
-
-  getToken():string {
-    return this.token;
-  }
-
-  decodeJWT()
-  {   if (this.token == undefined)
-            return;
-    const decodedToken = this.helper.decodeToken(this.token);
-    this.roles = decodedToken.roles;
-    this.loggedUser = decodedToken.sub;
-  }
-
- 
-
-
- /* SignIn(user: User): Boolean {
-    let validUser: Boolean = false;
-    this.users.forEach((curUser) => {
-      if (user.username == curUser.username && user.password == curUser.password) {
-        validUser = true;
-        this.loggedUser = curUser.username;
-        this.isloggedIn = true;
-        this.roles = curUser.roles;
-        localStorage.setItem('loggedUser', this.loggedUser);
-        localStorage.setItem('isloggedIn', String(this.isloggedIn));
-      }
+  login(user: User): Observable<any> {
+    return this.http.post<any>(`${this.apiURL}/login`, user, {
+      observe: 'response',
     });
-    return validUser;
-  }*/
-
-  isAdmin():Boolean{
-    if (!this.roles) //this.roles== undefiened
-    return false;
-    return (this.roles.indexOf('ADMIN') >-1) ;
-    ;
-  }  
-
-
-  logout() {
-  this.loggedUser = undefined!;
-  this.roles = undefined!;
-  this.token= undefined!;
-  this.isloggedIn = false;
-  localStorage.removeItem('jwt');
-  this.router.navigate(['/login']);
   }
 
-  setLoggedUserFromLocalStorage(login: string) {
-    this.loggedUser = login;
-    this.isloggedIn = true;
-   // this.getUserRoles(login);
+  saveToken(jwt: string): void {
+    localStorage.setItem('jwt', jwt);
+    this.tokenSubject.next(jwt);
+    this.decodeJWT(jwt);
   }
 
-  loadToken() {
-    this.token = localStorage.getItem('jwt')!;
-    this.decodeJWT();
+  loadToken(): void {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      this.tokenSubject.next(token);
+      this.decodeJWT(token);
+    }
   }
 
-  isTokenExpired(): Boolean
-  {
-    return  this.helper.isTokenExpired(this.token);   
+  getToken(): string | null {
+    return this.tokenSubject.value;
   }
 
+  isTokenExpired(): boolean {
+    const token = this.tokenSubject.value;
+    return token ? this.helper.isTokenExpired(token) : true;
+  }
 
+  logout(): void {
+    localStorage.removeItem('jwt');
+    this.tokenSubject.next(null);
+    this.rolesSubject.next([]);
+    this.loggedUserSubject.next(null);
+    this.router.navigate(['/login']);
+  }
 
-  /*getUserRoles(username: string) {
-    this.users.forEach((curUser) => {
-      if (curUser.username == username) {
-        this.roles = curUser.roles;
-      }
-    });
-  }*/
-    
+  private decodeJWT(token: string): void {
+    const decodedToken = this.helper.decodeToken(token);
+    this.rolesSubject.next(decodedToken.roles ?? []);
+    this.loggedUserSubject.next(decodedToken.sub ?? null);
+  }
+
+  isAdmin(): boolean {
+    return this.rolesSubject.value.includes('ADMIN');
+  }
+
+  isLoggedIn(): boolean {
+    const token = this.tokenSubject.value;
+    return !!token && !this.helper.isTokenExpired(token);
+  }
 }
