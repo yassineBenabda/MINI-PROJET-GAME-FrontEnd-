@@ -1,28 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './app.component.html',
+  imports: [RouterLink,RouterOutlet],
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  title = 'MesProduits';
+  title = 'Mes Produits';
+  constructor (public authService: AuthService,
+              private router: Router,
+  ) {}
 
-  constructor(public authService: AuthService, private router: Router) {}
-
-  ngOnInit(): void {
+  ngOnInit () {
     this.authService.loadToken();
+    if (this.authService.getToken()==null ||  this.authService.isTokenExpired())
+          this.router.navigate(['/login']);
 
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/login']);
-    }
   }
+  
 
-  onLogout(): void {
+  onLogout(){
+    console.log("logout-------1");
     this.authService.logout();
   }
+
+
 }

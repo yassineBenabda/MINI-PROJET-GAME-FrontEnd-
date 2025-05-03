@@ -1,48 +1,58 @@
 import { Routes } from '@angular/router';
-import { GameGuard } from './game.guard';
+import { gameGuard } from './game.guard';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { GamesComponent } from './games/games.component';
+import { AddGamesComponent } from './add-games/add-games.component';
+import { UpdateGameComponent } from './update-game/update-game.component';
+import { RechercheParGenreComponent } from './recherche-par-genre/recherche-par-genre.component';
+import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
+import { ListeGenresComponent } from './liste-genres/liste-genres.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { VerifEmailComponent } from './verif-email/verif-email.component';
 
 export const routes: Routes = [
   {
     path: 'login',
-    loadComponent: () =>
-      import('./login/login.component').then(m => m.LoginComponent),
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     path: 'games',
-    loadComponent: () =>
-      import('./games/games.component').then(m => m.GamesComponent),
+    component: GamesComponent,
   },
   {
     path: 'add-games',
-    canActivate:[GameGuard],
-    loadComponent: () =>
-      import('./add-games/add-games.component').then(m => m.AddGamesComponent),
+    canActivate: [gameGuard],
+    component: AddGamesComponent,
   },
   {
     path: 'updateGame/:id',
-    canActivate:[GameGuard],
-    loadComponent: () =>
-      import('./update-game/update-game.component').then(m => m.UpdateGameComponent),
+    canActivate: [gameGuard],
+    component: UpdateGameComponent,
   },
   {
     path: 'recherche-par-genre',
-    loadComponent: () =>
-      import('./recherche-par-genre/recherche-par-genre.component').then(m => m.RechercheParGenreComponent),
+    component: RechercheParGenreComponent,
   },
   {
     path: 'recherche-par-nom',
-    loadComponent: () =>
-      import('./recherche-par-nom/recherche-par-nom.component').then(m => m.RechercheParNomComponent),
+    component: RechercheParNomComponent,
   },
   {
     path: 'liste-genres',
-    loadComponent: () =>
-      import('./liste-genres/liste-genres.component').then(m => m.ListeGenresComponent),
+    component: ListeGenresComponent,
   },
   {
     path: 'forbidden',
-    loadComponent: () =>
-      import('./forbidden/forbidden.component').then(m => m.ForbiddenComponent),
+    component: ForbiddenComponent,
+  },
+  {
+    path: 'verifEmail',
+    component: VerifEmailComponent,
   },
   {
     path: '',
