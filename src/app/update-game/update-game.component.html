@@ -39,12 +39,12 @@ myForm.controls['nomGame'].touched" class="text-danger">
     </span>
 
     <div class="col-sm-4 col-md-4 col-lg-4">
-      <label>Date création</label>
+      <label>Date de Sortie</label>
       <input type="date" formControlName="datedeSortie" [ngModel]="currentGame.datedeSortie | date: 'yyyy-MM-dd'"
         (ngModelChange)=" currentGame.datedeSortie= $event" name="datedeSortie" class="form-control">
     </div> <span *ngIf="myForm.controls['datedeSortie'].hasError('required')&& myForm.controls['datedeSortie'].touched"
       class="text-danger">
-      la date de création de Game est obligatoire
+      la date de sortie de Game est obligatoire
     </span>
     <div class="col-sm-4 col-md-4 col-lg-4">
       <label>email :</label>

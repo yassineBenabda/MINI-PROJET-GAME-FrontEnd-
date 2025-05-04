@@ -34,11 +34,11 @@
     }
 
     <div class="col-sm-4 col-md-4 col-lg-4">
-      <label>Date création</label>
+      <label>Date de Sortie</label>
       <input type="date" formControlName="datedeSortie" name="datedeSortie" class="form-control">
     </div>
     @if (myForm.controls['datedeSortie'].hasError('required') && myForm.controls['datedeSortie'].touched) {
-      <span class="text-danger">la date de création de Game est obligatoire</span>
+      <span class="text-danger">la date de sortie de Game est obligatoire</span>
     }
 
     <div class="col-sm-4 col-md-4 col-lg-4">
