@@ -12,51 +12,15 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { VerifEmailComponent } from './verif-email/verif-email.component';
 
 export const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-  },
-  {
-    path: 'games',
-    component: GamesComponent,
-  },
-  {
-    path: 'add-games',
-    canActivate: [gameGuard],
-    component: AddGamesComponent,
-  },
-  {
-    path: 'updateGame/:id',
-    canActivate: [gameGuard],
-    component: UpdateGameComponent,
-  },
-  {
-    path: 'recherche-par-genre',
-    component: RechercheParGenreComponent,
-  },
-  {
-    path: 'recherche-par-nom',
-    component: RechercheParNomComponent,
-  },
-  {
-    path: 'liste-genres',
-    component: ListeGenresComponent,
-  },
-  {
-    path: 'forbidden',
-    component: ForbiddenComponent,
-  },
-  {
-    path: 'verifEmail',
-    component: VerifEmailComponent,
-  },
-  {
-    path: '',
-    redirectTo: 'games',
-    pathMatch: 'full',
-  },
+  {path: 'login',component: LoginComponent,},
+  {path: 'register',component: RegisterComponent,},
+  {path: 'games',component: GamesComponent,},
+  {path: 'add-games',canActivate: [gameGuard],component: AddGamesComponent,},
+  {path: 'updateGame/:id',canActivate: [gameGuard],component: UpdateGameComponent,},
+  {path: 'recherche-par-genre',component: RechercheParGenreComponent,},
+  {path: 'recherche-par-nom',component: RechercheParNomComponent,},
+  {path: 'liste-genres',component: ListeGenresComponent,},
+  {path: 'forbidden',component: ForbiddenComponent,},
+  {path: 'verifEmail',component: VerifEmailComponent,},
+  {path: '',redirectTo: 'games',pathMatch: 'full',},
 ];

@@ -5,7 +5,6 @@ import { Game } from '../model/game.model';
 import { Genre } from '../model/genre.model';
 import { GenreWrapper } from '../model/genre.Wrapped.model';
 import { AuthService } from './auth.service';
-import { apiURL, apiURLGenre } from '../config';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -14,63 +13,75 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root',
 })
+
 export class GameService {
   games!: Game[];
   genres!: Genre[];
   gamesRecherche!: Game[];
 
+  apiURL: string = 'http://localhost:8080/games/api';
+  apiURLGenre: string = 'http://localhost:8080/games/genre';
+
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) {}
+  ) { }
 
   listeGame(): Observable<Game[]> {
-    return this.http.get<Game[]>(`${apiURL}/all`);
-  }
-
-  ajouterGame(game: Game): Observable<Game> {
-    const jwt = `Bearer ${this.authService.getToken()}`;
-    const headers = new HttpHeaders({ Authorization: jwt });
-    return this.http.post<Game>(`${apiURL}/addgame`, game, { headers });
-  }
-
-  supprimerGame(id: number): Observable<void> {
-    const url = `${apiURL}/deletegame/${id}`;
-    const jwt = `Bearer ${this.authService.getToken()}`;
-    const headers = new HttpHeaders({ Authorization: jwt });
-    return this.http.delete<void>(url, { headers });
+    let jwt = this.authService.getToken();
+    jwt = "Bearer " + jwt;
+    let httpHeaders = new HttpHeaders({ "Authorization": jwt })
+    return this.http.get<Game[]>(`${this.apiURL}/all`, { headers: httpHeaders });
   }
 
   consulterGame(id: number): Observable<Game> {
-    const url = `${apiURL}/getbyid/${id}`;
+    const url = `${this.apiURL}/getbyid/${id}`;
     const jwt = `Bearer ${this.authService.getToken()}`;
     const headers = new HttpHeaders({ Authorization: jwt });
     return this.http.get<Game>(url, { headers });
   }
 
+  ajouterGame(game: Game): Observable<Game> {
+    const jwt = `Bearer ${this.authService.getToken()}`;
+    const headers = new HttpHeaders({ Authorization: jwt });
+    return this.http.post<Game>(`${this.apiURL}/addgame`, game, { headers });
+  }
+
+  supprimerGame(id: number) {
+    const url = `${this.apiURL}/deletegame/${id}`;
+    const jwt = `Bearer ${this.authService.getToken()}`;
+    let httpHeaders = new HttpHeaders({ "Authorization": jwt })
+    return this.http.delete(url, { headers: httpHeaders });
+  }
+
   updateGame(game: Game): Observable<Game> {
     const jwt = `Bearer ${this.authService.getToken()}`;
     const headers = new HttpHeaders({ Authorization: jwt });
-    return this.http.put<Game>(`${apiURL}/updategame`, game, { headers });
+    return this.http.put<Game>(`${this.apiURL}/updategame`, game, { headers });
   }
 
   listeGenres(): Observable<GenreWrapper> {
     const jwt = `Bearer ${this.authService.getToken()}`;
     const headers = new HttpHeaders({ Authorization: jwt });
-    return this.http.get<GenreWrapper>(apiURLGenre, { headers });
+    return this.http.get<GenreWrapper>(this.apiURLGenre, { headers });
+  }
+
+  ajouterGenre(genre: Genre): Observable<Genre> {
+    return this.http.post<Genre>(this.apiURLGenre, genre, httpOptions);
+  }
+
+  consulterGenre(id: number): Genre {
+    return this.genres.find((gen) => gen.idGenre == id)!;
   }
 
   rechercherParGenre(idGenre: number): Observable<Game[]> {
-    const url = `${apiURL}/gamesgenre/${idGenre}`;
+    const url = `${this.apiURL}/gamesgenre/${idGenre}`;
     return this.http.get<Game[]>(url);
   }
 
   rechercherParNom(nom: string): Observable<Game[]> {
-    const url = `${apiURL}/gamesByName/${nom}`;
+    const url = `${this.apiURL}/gamesByName/${nom}`;
     return this.http.get<Game[]>(url);
   }
 
-  ajouterGenre(genre: Genre): Observable<Genre> {
-    return this.http.post<Genre>(apiURLGenre, genre, httpOptions);
-  }
 }
