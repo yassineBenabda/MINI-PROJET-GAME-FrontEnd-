@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nom</th>
+              <th>Pays</th>
+              <th colspan="2" *ngIf="authService.isAdmin()">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (dev of developers; track dev.idDeveloper) {
+              <tr>
+                <td>{{ dev.idDeveloper }}</td>
+                <td>{{ dev.name }}</td>
+                <td>{{ dev.country }}</td>
+  
+                @if (authService.isAdmin()) {
+                 
+                  <td>
+                    <a class="btn btn-success" [routerLink]="['/updateDeveloper', dev.idDeveloper]">Modifier</a>
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

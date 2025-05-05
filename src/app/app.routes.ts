@@ -10,6 +10,10 @@ import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.
 import { ListeGenresComponent } from './liste-genres/liste-genres.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { VerifEmailComponent } from './verif-email/verif-email.component';
+import { DeveloperComponent } from './developer/developer.component';
+import { PlatformComponent } from './platform/platform.component';
+import { AddPlatformComponent } from './add-platform/add-platform.component';
+import { AddDeveloperComponent } from './add-developer/add-developer.component';
 
 export const routes: Routes = [
   {path: 'login',component: LoginComponent,},
@@ -22,5 +26,9 @@ export const routes: Routes = [
   {path: 'liste-genres',component: ListeGenresComponent,},
   {path: 'forbidden',component: ForbiddenComponent,},
   {path: 'verifEmail',component: VerifEmailComponent,},
+  {path: 'developer',component: DeveloperComponent,},
+  {path: 'platform',component: PlatformComponent,},
+  {path: 'addPlatform',component: AddPlatformComponent,},
+  {path: 'addDeveloper',component: AddDeveloperComponent,},
   {path: '',redirectTo: 'games',pathMatch: 'full',},
 ];

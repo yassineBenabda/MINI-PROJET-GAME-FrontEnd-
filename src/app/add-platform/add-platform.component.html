@@ -1,0 +1,27 @@
+<div class="container mt-4">
+    <div class="card shadow">
+      <div class="card-header">
+        <h4>Ajouter une plateforme</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="platformForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label class="form-label">Nom de la plateforme</label>
+            <input type="text" formControlName="name" class="form-control" [class.is-invalid]="platformForm.get('name')?.invalid && platformForm.get('name')?.touched">
+            <div class="invalid-feedback" *ngIf="platformForm.get('name')?.errors?.['required']">Nom requis.</div>
+            <div class="invalid-feedback" *ngIf="platformForm.get('name')?.errors?.['minlength']">Au moins 2 caractères.</div>
+          </div>
+  
+          <div class="mb-3">
+            <label class="form-label">Fabricant</label>
+            <input type="text" formControlName="manufacturer" class="form-control" [class.is-invalid]="platformForm.get('manufacturer')?.invalid && platformForm.get('manufacturer')?.touched">
+            <div class="invalid-feedback" *ngIf="platformForm.get('manufacturer')?.errors?.['required']">Fabricant requis.</div>
+          </div>
+  
+          <button type="submit" class="btn btn-primary">Ajouter</button>
+          <a routerLink="/platforms" class="btn btn-secondary ms-2">Annuler</a>
+        </form>
+      </div>
+    </div>
+  </div>
+  

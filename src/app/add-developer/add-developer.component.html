@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Ajouter un Développeur</h5>
+                </div>
+                <div class="card-body">
+                    <form #developerForm="ngForm" (ngSubmit)="onSubmit(developerForm)">
+                        <div class="mb-3">
+                            <label for="nameDev" class="form-label">Nom du Développeur</label>
+                            <input type="text" id="nameDev" name="name" class="form-control" required
+                                [(ngModel)]="developer.name" placeholder="Entrez le nom"
+                                [ngClass]="{ 'is-invalid': developerForm.submitted && !developer.name }" />
+                            <div class="invalid-feedback">Le nom est requis.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="country" class="form-label">Pays</label>
+                            <input type="text" id="country" name="country" class="form-control" required
+                                [(ngModel)]="developer.country" placeholder="Entrez le pays"
+                                [ngClass]="{ 'is-invalid': developerForm.submitted && !developer.country }" />
+                            <div class="invalid-feedback">Le pays est requis.</div>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-success" [disabled]="developerForm.invalid">
+                                Ajouter
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nom</th>
+              <th>Fabricant</th>
+              <th colspan="2" *ngIf="authService.isAdmin()">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of platforms; track p.idPlatform) {
+              <tr>
+                <td>{{ p.idPlatform }}</td>
+                <td>{{ p.name }}</td>
+                <td>{{ p.manufacturer }}</td>
+  
+                @if (authService.isAdmin()) {
+                  <td>
+                    <button class="btn btn-danger" (click)="supprimerPlatform(p)">Supprimer</button>
+                  </td>
+                  <td>
+                    <a class="btn btn-success" [routerLink]="['/updatePlatform', p.idPlatform]">Modifier</a>
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
