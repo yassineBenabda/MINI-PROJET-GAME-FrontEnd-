@@ -70,6 +70,13 @@ export class GameService {
     return this.http.post<Genre>(this.apiURLGenre, genre, httpOptions);
   }
 
+  supprimerGenre(id: number) {
+    const url = `${this.apiURL}/genre/deletegenre/${id}`;
+    const jwt = `Bearer ${this.authService.getToken()}`;
+    let httpHeaders = new HttpHeaders({ "Authorization": jwt })
+    return this.http.delete(url, { headers: httpHeaders });
+  }
+
   consulterGenre(id: number): Genre {
     return this.genres.find((gen) => gen.idGenre == id)!;
   }

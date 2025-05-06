@@ -38,9 +38,15 @@ export class ListeGenresComponent implements OnInit {
     });
   }
   
-
   updateGenre(genre: Genre) {
     this.updatedGenre = genre;
     this.ajout = false;
   }
+
+  supprimerGenre(genre: Genre) {
+    this.gameService.supprimerGenre(genre.idGenre).subscribe(() => {
+      this.chargerGenres();
+    });
+  }
+
 }

@@ -24,12 +24,14 @@
                 <td>{{ genre.idGenre }}</td>
                 <td>{{ genre.nomGenre }}</td>
                 <td>
+                  <a class="btn btn-danger" (click)="supprimerGenre(genre)">Supprimer</a>
+                </td>
+                <td>
                   <a class="btn btn-success" (click)="updateGenre(genre)">Modifier</a>
                 </td>
               </tr>
             </tbody>
           }
-  
         </table>
       </div>
     </div>
