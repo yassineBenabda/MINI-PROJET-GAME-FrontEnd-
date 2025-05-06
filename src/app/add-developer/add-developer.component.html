@@ -6,13 +6,13 @@
       <!-- ID Developer (hidden) -->
       <div hidden>
         <label>ID Developer</label>
-        <input type="text" formControlName="idDeveloper" [(ngModel)]="newDeveloper.idDeveloper" name="idDeveloper" class="form-control">
+        <input type="text" formControlName="idDeveloper" [(ngModel)]="currentDeveloper.idDeveloper" name="idDeveloper" class="form-control">
       </div>
   
       <!-- Name -->
       <div class="mb-3">
         <label>Nom</label>
-        <input type="text" formControlName="name" [(ngModel)]="newDeveloper.name" name="name" class="form-control">
+        <input type="text" formControlName="name" [(ngModel)]="currentDeveloper.name" name="name" class="form-control">
         @if (developerForm.controls['name'].hasError('required') && developerForm.controls['name'].touched) {
           <span class="text-danger">Le nom est obligatoire</span>
         }
@@ -24,7 +24,7 @@
       <!-- Country -->
       <div class="mb-3">
         <label>Pays</label>
-        <input type="text" formControlName="country" [(ngModel)]="newDeveloper.country" name="country" class="form-control">
+        <input type="text" formControlName="country" [(ngModel)]="currentDeveloper.country" name="country" class="form-control">
         @if (developerForm.controls['country'].hasError('required') && developerForm.controls['country'].touched) {
           <span class="text-danger">Le pays est obligatoire</span>
         }

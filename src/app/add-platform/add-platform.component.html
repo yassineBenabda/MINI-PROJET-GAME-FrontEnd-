@@ -6,13 +6,13 @@
     <!-- ID Platform (hidden) -->
     <div hidden>
       <label>ID Platform</label>
-      <input type="text" formControlName="idPlatform" [(ngModel)]="newPlatform.idPlatform" name="idPlatform" class="form-control">
+      <input type="text" formControlName="idPlatform" [(ngModel)]="currentPlatform.idPlatform" name="idPlatform" class="form-control">
     </div>
 
     <!-- Name -->
     <div class="mb-3">
       <label>Nom de la Plateforme</label>
-      <input type="text" formControlName="name" [(ngModel)]="newPlatform.name" name="name" class="form-control">
+      <input type="text" formControlName="name" [(ngModel)]="currentPlatform.name" name="name" class="form-control">
       @if (platformForm.controls['name'].hasError('required') && platformForm.controls['name'].touched) {
         <span class="text-danger">Le nom est obligatoire</span>
       }
@@ -21,7 +21,7 @@
     <!-- Manufacturer -->
     <div class="mb-3">
       <label>Fabricant</label>
-      <input type="text" formControlName="manufacturer" [(ngModel)]="newPlatform.manufacturer" name="manufacturer" class="form-control">
+      <input type="text" formControlName="manufacturer" [(ngModel)]="currentPlatform.manufacturer" name="manufacturer" class="form-control">
       @if (platformForm.controls['manufacturer'].hasError('required') && platformForm.controls['manufacturer'].touched) {
         <span class="text-danger">Le fabricant est obligatoire</span>
       }
