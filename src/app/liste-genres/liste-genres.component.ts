@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Genre } from '../model/genre.model';
 import { GameService } from '../services/game.service';
 import { UpdateGenresComponent } from '../update-genres/update-genres.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-liste-genres',
   standalone: true,
-  imports: [CommonModule,UpdateGenresComponent],
+  imports: [CommonModule,UpdateGenresComponent,RouterLink],
   templateUrl: './liste-genres.component.html'
 })
 export class ListeGenresComponent implements OnInit {

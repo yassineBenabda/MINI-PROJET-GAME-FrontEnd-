@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Developer } from '../model/developer.model';
@@ -8,7 +8,7 @@ import { DeveloperService } from '../services/developer.service';
 @Component({
   selector: 'app-add-developer',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, RouterLink],
   templateUrl: './add-developer.component.html'
 })
 export class AddDeveloperComponent implements OnInit {
