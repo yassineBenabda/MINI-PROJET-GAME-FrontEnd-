@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { DeveloperService } from '../services/developer.service';
 import { Developer } from '../model/developer.model';
 import { AuthService } from '../services/auth.service';
@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-developer',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, RouterLink],
   templateUrl: './developer.component.html',
 })
 
