@@ -31,8 +31,13 @@ export class ListeGenresComponent implements OnInit {
 
   genreUpdated(genre: Genre) {
     console.log("Genre updated event", genre);
-    this.gameService.ajouterGenre(genre).subscribe(() => this.chargerGenres());
+    this.gameService.ajouterGenre(genre).subscribe(() => {
+      this.chargerGenres();
+      this.ajout = true;
+      this.updatedGenre = { idGenre: 0, nomGenre: "" };
+    });
   }
+  
 
   updateGenre(genre: Genre) {
     this.updatedGenre = genre;
