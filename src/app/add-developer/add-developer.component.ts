@@ -1,47 +1,37 @@
-import { Component } from '@angular/core';
-import { NgForm, FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { DeveloperService } from '../services/developer.service';
 import { Developer } from '../model/developer.model';
+import { DeveloperService } from '../services/developer.service';
 
 @Component({
   selector: 'app-add-developer',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './add-developer.component.html',
-  styleUrls: ['./add-developer.component.css']
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  templateUrl: './add-developer.component.html'
 })
-export class AddDeveloperComponent {
-  developer: Developer = {
-    name: '',
-    country: ''
-  };
+export class AddDeveloperComponent implements OnInit {
+  currentDeveloper = new Developer();
+  developerForm!: FormGroup;
 
-  submitted = false;
+  constructor(
+    private developerService: DeveloperService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {}
 
-  constructor(private developerService: DeveloperService) {}
-
-  saveDeveloper(): void {
-    this.developerService.create(this.developer).subscribe({
-      next: (res) => {
-        console.log('Developer created successfully:', res);
-        this.submitted = true;
-      },
-      error: (e) => console.error(e)
+  ngOnInit(): void {
+    this.developerForm = this.formBuilder.group({
+      idDeveloper: [''],
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      country: ['', [Validators.required]]
     });
   }
 
-  onSubmit(form: NgForm): void {
-    if (form.valid) {
-      this.saveDeveloper();
-    }
-  }
-
-  newDeveloper(): void {
-    this.submitted = false;
-    this.developer = {
-      name: '',
-      country: ''
-    };
+  ajouterDeveloper() {
+    this.developerService.ajouterDeveloper(this.currentDeveloper).subscribe(() => {
+      this.router.navigate(['developers']);
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,33 +11,28 @@ import { Platform } from '../model/platform.model';
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './add-platform.component.html'
 })
-export class AddPlatformComponent {
-  private fb = inject(FormBuilder);
-  private platformService = inject(PlatformService);
-  private router = inject(Router);
 
-  platformForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(2)]],
-    manufacturer: ['', Validators.required]
-  });
-
-  /** Submit form to create a new platform */
-  onSubmit(): void {
-    if (this.platformForm.invalid) {
-      this.platformForm.markAllAsTouched();
-      return;
+  export class AddPlatformComponent implements OnInit {
+    currentPlatform = new Platform();
+    platformForm!: FormGroup;
+  
+    constructor(
+      private platformService: PlatformService,
+      private router: Router,
+      private formBuilder: FormBuilder
+    ) {}
+  
+    ngOnInit(): void {
+      this.platformForm = this.formBuilder.group({
+        idPlatform: [''],
+        name: ['', [Validators.required]],
+        manufacturer: ['', [Validators.required]]
+      });
     }
-
-    const newPlatform: Platform = this.platformForm.value;
-
-    this.platformService.create(newPlatform).subscribe({
-      next: () => this.router.navigate(['/platform']),
-      error: (err) => console.error('Erreur lors de l\'ajout de la plateforme', err)
-    });
+  
+    ajouterPlatform() {
+      this.platformService.ajouterPlatform(this.currentPlatform).subscribe(() => {
+        this.router.navigate(['platforms']);
+      });
+    }
   }
-
-  /** Shortcut to access form controls in template */
-  get f() {
-    return this.platformForm.controls;
-  }
-}

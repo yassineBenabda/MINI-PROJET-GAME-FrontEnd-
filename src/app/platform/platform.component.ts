@@ -15,25 +15,24 @@ export class PlatformComponent implements OnInit {
   private platformService = inject(PlatformService);
   authService = inject(AuthService);
 
-  platforms: Platform[] = [];
+  platforms!: Platform[];
 
   ngOnInit(): void {
-    this.fetchPlatforms();
+    this.ChargerPlatforms();
   }
 
-  fetchPlatforms(): void {
-    this.platformService.getAll().subscribe({
-      next: (data) => (this.platforms = data),
-      error: (err) => console.error('Erreur de chargement des plateformes', err),
+  ChargerPlatforms() {
+    this.platformService.listePlatform().subscribe((platforms) => {
+      console.log(platforms);
+      this.platforms = platforms;
+    });
+  }
+  
+  supprimerPlatform(p: Platform) {
+    this.platformService.supprimerPlatform(p.idPlatform!).subscribe(() => {
+      console.log('platform supprimée');
+      this.ChargerPlatforms();
     });
   }
 
-  supprimerPlatform(platform: Platform): void {
-    if (confirm(`Supprimer la plateforme ${platform.name} ?`)) {
-      this.platformService.delete(platform.idPlatform).subscribe({
-        next: () => this.fetchPlatforms(),
-        error: (err) => console.error('Erreur suppression plateforme', err),
-      });
-    }
-  }
 }

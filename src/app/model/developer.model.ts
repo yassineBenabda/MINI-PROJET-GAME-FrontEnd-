@@ -1,6 +1,6 @@
-export interface Developer {
-    idDeveloper?: number;
-    name: string;
-    country: string;
+export class Developer {
+    idDeveloper!: number;
+    name!: string;
+    country!: string;
   }
   

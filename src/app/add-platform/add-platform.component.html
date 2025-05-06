@@ -1,27 +1,34 @@
 <div class="container mt-4">
-    <div class="card shadow">
-      <div class="card-header">
-        <h4>Ajouter une plateforme</h4>
-      </div>
-      <div class="card-body">
-        <form [formGroup]="platformForm" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
-            <label class="form-label">Nom de la plateforme</label>
-            <input type="text" formControlName="name" class="form-control" [class.is-invalid]="platformForm.get('name')?.invalid && platformForm.get('name')?.touched">
-            <div class="invalid-feedback" *ngIf="platformForm.get('name')?.errors?.['required']">Nom requis.</div>
-            <div class="invalid-feedback" *ngIf="platformForm.get('name')?.errors?.['minlength']">Au moins 2 caractères.</div>
-          </div>
-  
-          <div class="mb-3">
-            <label class="form-label">Fabricant</label>
-            <input type="text" formControlName="manufacturer" class="form-control" [class.is-invalid]="platformForm.get('manufacturer')?.invalid && platformForm.get('manufacturer')?.touched">
-            <div class="invalid-feedback" *ngIf="platformForm.get('manufacturer')?.errors?.['required']">Fabricant requis.</div>
-          </div>
-  
-          <button type="submit" class="btn btn-primary">Ajouter</button>
-          <a routerLink="/platforms" class="btn btn-secondary ms-2">Annuler</a>
-        </form>
-      </div>
-    </div>
+  <div>
+    <h2>Ajouter une Plateforme :</h2>
   </div>
-  
+  <form [formGroup]="platformForm">
+    <!-- ID Platform (hidden) -->
+    <div hidden>
+      <label>ID Platform</label>
+      <input type="text" formControlName="idPlatform" [(ngModel)]="newPlatform.idPlatform" name="idPlatform" class="form-control">
+    </div>
+
+    <!-- Name -->
+    <div class="mb-3">
+      <label>Nom de la Plateforme</label>
+      <input type="text" formControlName="name" [(ngModel)]="newPlatform.name" name="name" class="form-control">
+      @if (platformForm.controls['name'].hasError('required') && platformForm.controls['name'].touched) {
+        <span class="text-danger">Le nom est obligatoire</span>
+      }
+    </div>
+
+    <!-- Manufacturer -->
+    <div class="mb-3">
+      <label>Fabricant</label>
+      <input type="text" formControlName="manufacturer" [(ngModel)]="newPlatform.manufacturer" name="manufacturer" class="form-control">
+      @if (platformForm.controls['manufacturer'].hasError('required') && platformForm.controls['manufacturer'].touched) {
+        <span class="text-danger">Le fabricant est obligatoire</span>
+      }
+    </div>
+
+    <div class="mt-2">
+      <button type="submit" (click)="ajouterPlatform()" class="btn btn-primary">Ajouter</button>
+    </div>
+  </form>
+</div>

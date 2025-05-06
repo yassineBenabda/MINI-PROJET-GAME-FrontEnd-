@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Developer } from '../model/developer.model';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,25 +10,32 @@ import { Observable } from 'rxjs';
 export class DeveloperService {
   private baseUrl = 'http://localhost:8080/games/api/developers';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getAll(): Observable<Developer[]> {
-    return this.http.get<Developer[]>(this.baseUrl+"/all");
+  private getAuthHeaders(): HttpHeaders {
+    const token = this.authService.getToken();
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
   }
 
-  getById(id: number): Observable<Developer> {
-    return this.http.get<Developer>(`${this.baseUrl}/${id}`);
+  listeDeveloper(): Observable<Developer[]> {
+    return this.http.get<Developer[]>(`${this.baseUrl}/all`, { headers: this.getAuthHeaders() });
   }
 
-  create(developer: Developer): Observable<Developer> {
-    return this.http.post<Developer>(this.baseUrl+"/add", developer);
+  consulterDeveloper(id: number): Observable<Developer> {
+    return this.http.get<Developer>(`${this.baseUrl}/getbyid/${id}`, { headers: this.getAuthHeaders() });
   }
 
-  update(id: number, developer: Developer): Observable<Developer> {
-    return this.http.put<Developer>(`${this.baseUrl}/${id}`, developer);
+  ajouterDeveloper(developer: Developer): Observable<Developer> {
+    return this.http.post<Developer>(`${this.baseUrl}/adddeveloper`, developer, { headers: this.getAuthHeaders() });
   }
 
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  updateDeveloper(developer: Developer): Observable<Developer> {
+    return this.http.put<Developer>(`${this.baseUrl}/updatedeveloper`, developer, { headers: this.getAuthHeaders() });
+  }
+
+  supprimerDeveloper(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/deletedeveloper/${id}`, { headers: this.getAuthHeaders() });
   }
 }

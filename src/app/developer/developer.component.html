@@ -1,33 +1,34 @@
 <div class="container">
-    <div class="card shadow mb-4">
-      <div class="card-body">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Nom</th>
-              <th>Pays</th>
-              <th colspan="2" *ngIf="authService.isAdmin()">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (dev of developers; track dev.idDeveloper) {
-              <tr>
-                <td>{{ dev.idDeveloper }}</td>
-                <td>{{ dev.name }}</td>
-                <td>{{ dev.country }}</td>
-  
-                @if (authService.isAdmin()) {
-                 
-                  <td>
-                    <a class="btn btn-success" [routerLink]="['/updateDeveloper', dev.idDeveloper]">Modifier</a>
-                  </td>
-                }
-              </tr>
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Pays</th>
+            <th colspan="2" *ngIf="authService.isAdmin()">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (dev of developers; track dev.idDeveloper) {
+          <tr>
+            <td>{{ dev.idDeveloper }}</td>
+            <td>{{ dev.name }}</td>
+            <td>{{ dev.country }}</td>
+
+            @if (authService.isAdmin()) {
+            <td>
+              <a class="btn btn-danger" (click)="supprimerDeveloper(dev)">Supprimer</a>
+            </td>
+            <td>
+              <a class="btn btn-success" [routerLink]="['/updateDeveloper', dev.idDeveloper]">Modifier</a>
+            </td>
             }
-          </tbody>
-        </table>
-      </div>
+          </tr>
+          }
+        </tbody>
+      </table>
     </div>
   </div>
-  
+</div>

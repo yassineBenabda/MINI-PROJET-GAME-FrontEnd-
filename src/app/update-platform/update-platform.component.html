@@ -1,0 +1,39 @@
+<div class="container">
+  <div>
+    <h2>Modifier une Platform :</h2>
+  </div>
+
+  <form [formGroup]="myForm">
+    <!-- ID Platform (readonly) -->
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>ID Platform</label>
+      <input type="text" class="form-control" formControlName="idPlatform" [(ngModel)]="currentPlatform.idPlatform" readonly>
+    </div>
+    <span *ngIf="myForm.controls['idPlatform'].hasError('required') && myForm.controls['idPlatform'].touched" class="text-danger">
+      ID Platform est obligatoire
+    </span>
+
+    <!-- Name -->
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Nom Platform</label>
+      <input type="text" class="form-control" formControlName="name" [(ngModel)]="currentPlatform.name" name="name">
+    </div>
+    <span *ngIf="myForm.controls['name'].hasError('required') && myForm.controls['name'].touched" class="text-danger">
+      Le nom de la platform est obligatoire
+    </span>
+
+    <!-- Manufacturer -->
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Fabricant</label>
+      <input type="text" class="form-control" formControlName="manufacturer" [(ngModel)]="currentPlatform.manufacturer" name="manufacturer">
+    </div>
+    <span *ngIf="myForm.controls['manufacturer'].hasError('required') && myForm.controls['manufacturer'].touched" class="text-danger">
+      Le fabricant est obligatoire
+    </span>
+
+    <!-- Submit Button -->
+    <div class="mt-2">
+      <button type="submit" class="btn btn-success" (click)="updatePlatform()" >Modifier</button>
+    </div>
+  </form>
+</div>

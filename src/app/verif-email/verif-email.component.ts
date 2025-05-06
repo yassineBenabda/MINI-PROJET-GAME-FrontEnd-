@@ -33,7 +33,7 @@ export class VerifEmailComponent implements OnInit {
           next: (data) => {
             let jwToken = data.headers.get('Authorization')!;
             this.authService.saveToken(jwToken);
-            this.router.navigate(['/']);
+            this.router.navigate(['/games']);
           },
           error: (err: any) => {
             console.log(err);

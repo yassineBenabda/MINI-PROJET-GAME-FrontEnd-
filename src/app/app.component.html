@@ -11,22 +11,22 @@
           <a class="nav-link active" aria-current="page" routerLink="/games">Home</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             Games
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             @if(authService.isAdmin()) {
-            <li><a class="dropdown-item" routerLink="/add-games">Ajouter des Games</a></li>
+            <li><a class="dropdown-item" routerLink="/addGames">Ajouter des Games</a></li>
             <li><a class="dropdown-item" routerLink="/addPlatform">Ajouter des Platforms</a></li>
             <li><a class="dropdown-item" routerLink="/addDeveloper">Ajouter des Developers</a></li>
             }
             <li> <a class="dropdown-item" routerLink="/games">Lister des Games</a></li>
-            <li> <a class="dropdown-item" routerLink="/developer">Developers</a></li>
-            <li> <a class="dropdown-item" routerLink="/platform">Platforms</a></li>
+            <li> <a class="dropdown-item" routerLink="/developers">Lister des Developers</a></li>
+            <li> <a class="dropdown-item" routerLink="/platforms">Lister des Platforms</a></li>
             <li> <a class="dropdown-item" routerLink="/recherche-par-genre">Recherche Par Genre</a></li>
             <li> <a class="dropdown-item" routerLink="/recherche-par-nom">Recherche Par Nom</a></li>
-            <li> <a class="dropdown-item" routerLink="/liste-genres">Gestion des Genres</a></li>
+            <li> <a class="dropdown-item" routerLink="/genres">Gestion des Genres</a></li>
           </ul>
         </li>
       </ul>
@@ -38,7 +38,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             @if(!authService.isloggedIn){
-            <li><a class="dropdown-item" routerLink="login">Login</a></li>
+            <li><a class="dropdown-item" routerLink="/login">Login</a></li>
             }
             @else {
             <li><a class="dropdown-item" (click)="onLogout()">Logout</a></li>

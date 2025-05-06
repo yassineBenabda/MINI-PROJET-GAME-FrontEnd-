@@ -11,22 +11,29 @@ import { AuthService } from '../services/auth.service';
   imports: [CommonModule, RouterModule],
   templateUrl: './developer.component.html',
 })
+
 export class DeveloperComponent implements OnInit {
   private developerService = inject(DeveloperService);
   authService = inject(AuthService);
 
-  developers: Developer[] = [];
+  developers!: Developer[];
 
   ngOnInit(): void {
-    this.fetchDevelopers();
+    this.ChargerDevelopers();
   }
 
-  fetchDevelopers(): void {
-    this.developerService.getAll().subscribe({
-      next: (data) => (this.developers = data),
-      error: (err) => console.error('Erreur de chargement des développeurs', err),
+  ChargerDevelopers() {
+    this.developerService.listeDeveloper().subscribe((devs) => {
+      console.log(devs);
+      this.developers = devs;
     });
   }
 
-  
+  supprimerDeveloper(d: Developer) {
+    this.developerService.supprimerDeveloper(d.idDeveloper!).subscribe(() => {
+      console.log('developer supprimé');
+      this.ChargerDevelopers();
+    });
+  }
+
 }

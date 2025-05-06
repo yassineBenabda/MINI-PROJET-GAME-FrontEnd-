@@ -1,41 +1,46 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Platform } from '../model/platform.model';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlatformService {
-  private readonly apiUrl = 'http://localhost:8080/games/api/platforms';
+  apiUrl: string = 'http://localhost:8080/games/api/platforms';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = this.authService.getToken();
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+  }
 
   /** GET all platforms */
-  getAll(): Observable<Platform[]> {
-    return this.http.get<Platform[]>(`${this.apiUrl}/all`);
+  listePlatform(): Observable<Platform[]> {
+    return this.http.get<Platform[]>(`${this.apiUrl}/all`, { headers: this.getAuthHeaders() });
   }
 
   /** GET platform by ID */
-  getById(id: number): Observable<Platform> {
-    return this.http.get<Platform>(`${this.apiUrl}/${id}`);
+  consulterPlatform(id: number): Observable<Platform> {
+    return this.http.get<Platform>(`${this.apiUrl}/getbyid/${id}`, { headers: this.getAuthHeaders() });
   }
 
   /** POST create new platform */
-  create(platform: Platform): Observable<Platform> {
-    return this.http.post<Platform>(`${this.apiUrl}/add`, platform);
+  ajouterPlatform(platform: Platform): Observable<Platform> {
+    return this.http.post<Platform>(`${this.apiUrl}/addplatform`, platform, { headers: this.getAuthHeaders() });
   }
 
   /** PUT update platform */
-  update(platform: Platform): Observable<Platform> {
-    if (!platform.idPlatform) {
-      throw new Error('Platform ID is required for update');
-    }
-    return this.http.put<Platform>(`${this.apiUrl}/${platform.idPlatform}`, platform);
+  updatePlatform(platform: Platform): Observable<Platform> {
+    return this.http.put<Platform>(`${this.apiUrl}/updateplatform`, platform, { headers: this.getAuthHeaders() });
   }
 
   /** DELETE platform */
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  supprimerPlatform(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/deleteplatform/${id}`, { headers: this.getAuthHeaders() });
   }
 }

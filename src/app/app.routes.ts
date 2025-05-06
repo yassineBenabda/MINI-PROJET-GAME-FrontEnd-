@@ -14,21 +14,25 @@ import { DeveloperComponent } from './developer/developer.component';
 import { PlatformComponent } from './platform/platform.component';
 import { AddPlatformComponent } from './add-platform/add-platform.component';
 import { AddDeveloperComponent } from './add-developer/add-developer.component';
+import { UpdateDeveloperComponent } from './update-developer/update-developer.component';
+import { UpdatePlatformComponent } from './update-platform/update-platform.component';
 
 export const routes: Routes = [
   {path: 'login',component: LoginComponent,},
   {path: 'register',component: RegisterComponent,},
-  {path: 'games',component: GamesComponent,},
-  {path: 'add-games',canActivate: [gameGuard],component: AddGamesComponent,},
-  {path: 'updateGame/:id',canActivate: [gameGuard],component: UpdateGameComponent,},
-  {path: 'recherche-par-genre',component: RechercheParGenreComponent,},
-  {path: 'recherche-par-nom',component: RechercheParNomComponent,},
-  {path: 'liste-genres',component: ListeGenresComponent,},
   {path: 'forbidden',component: ForbiddenComponent,},
   {path: 'verifEmail',component: VerifEmailComponent,},
-  {path: 'developer',component: DeveloperComponent,},
-  {path: 'platform',component: PlatformComponent,},
-  {path: 'addPlatform',component: AddPlatformComponent,},
-  {path: 'addDeveloper',component: AddDeveloperComponent,},
+  {path: 'games',component: GamesComponent,},
+  {path: 'developers',component: DeveloperComponent,},
+  {path: 'platforms',component: PlatformComponent,},
+  {path: 'genres',component: ListeGenresComponent,},
+  {path: 'recherche-par-genre',component: RechercheParGenreComponent,},
+  {path: 'recherche-par-nom',component: RechercheParNomComponent,},
+  {path: 'addGames',canActivate: [gameGuard],component: AddGamesComponent,},
+  {path: 'addPlatform',canActivate: [gameGuard],component: AddPlatformComponent,},
+  {path: 'addDeveloper',canActivate: [gameGuard],component: AddDeveloperComponent,},
+  {path: 'updateGame/:id',canActivate: [gameGuard],component: UpdateGameComponent,},
+  {path: 'updateDeveloper/:id',canActivate: [gameGuard],component: UpdateDeveloperComponent,},
+  {path: 'updatePlatform/:id',canActivate: [gameGuard],component: UpdatePlatformComponent,},
   {path: '',redirectTo: 'games',pathMatch: 'full',},
 ];

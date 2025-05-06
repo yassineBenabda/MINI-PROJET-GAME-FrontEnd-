@@ -1,6 +1,6 @@
-export interface Platform {
-    idPlatform: number;
-    name: string;
-    manufacturer: string;
+export class Platform {
+    idPlatform!: number;
+    name!: string;
+    manufacturer!: string;
   }
   
