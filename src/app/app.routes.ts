@@ -16,12 +16,15 @@ import { AddPlatformComponent } from './add-platform/add-platform.component';
 import { AddDeveloperComponent } from './add-developer/add-developer.component';
 import { UpdateDeveloperComponent } from './update-developer/update-developer.component';
 import { UpdatePlatformComponent } from './update-platform/update-platform.component';
+import { LibraryComponent } from './library/library.component';
+
 
 export const routes: Routes = [
   {path: 'login',component: LoginComponent,},
   {path: 'register',component: RegisterComponent,},
   {path: 'forbidden',component: ForbiddenComponent,},
   {path: 'verifEmail',component: VerifEmailComponent,},
+  {path: 'biblio', component: LibraryComponent,},
   {path: 'games',component: GamesComponent,},
   {path: 'developers',component: DeveloperComponent,},
   {path: 'platforms',component: PlatformComponent,},

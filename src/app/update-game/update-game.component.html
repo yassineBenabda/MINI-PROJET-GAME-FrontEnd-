@@ -69,8 +69,33 @@ myForm.controls['nomGame'].touched" class="text-danger">
       La Genre de Game est obligatoire
     </span>
 
+    <!-- Developer Dropdown -->
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Developer</label>
+      <select class="form-control form-control-lg" id="idDeveloper" name="idDeveloper" formControlName="developer"
+        [(ngModel)]="updatedDeveloperId">
+        <option *ngFor="let developer of developers" [value]="developer.idDeveloper">
+          {{ developer.name }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Platform Dropdown (Multiple Selection) -->
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Platform</label>
+      <select class="form-control form-control-lg" id="idPlatform" name="idPlatform" formControlName="platforms"
+        [(ngModel)]="updatedPlatformIds" multiple>
+        <option *ngFor="let platform of platforms" [value]="platform.idPlatform">
+          {{ platform.name }}
+        </option>
+      </select>
+    </div>
     <div class="mt-2">
       <button type="submit" (click)="updateGame()" class="btn btn-success" >Modifer</button>
     </div>
   </form>
+
+  <div class="text-center mb-4">
+    <a class="btn btn-primary" [routerLink]="['/games']">Back to Games</a>
+  </div>
 </div>

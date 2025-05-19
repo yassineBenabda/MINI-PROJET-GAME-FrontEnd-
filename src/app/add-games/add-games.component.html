@@ -87,7 +87,28 @@
         </span>
       }
     </div>
-
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Développeur</label>
+      <select class="form-control" formControlName="developer" [(ngModel)]="newIdDeveloper">
+        <option *ngFor="let dev of developers" [value]="dev.idDeveloper">
+          {{ dev.name }}
+        </option>
+      </select>
+      @if (myForm.controls['developer'].hasError('required') && myForm.controls['developer'].touched) {
+        <span class="text-danger">Le développeur est obligatoire</span>
+      }
+    </div>
+    <div class="col-sm-6">
+      <label>Plateformes</label>
+      <div *ngFor="let plat of platforms">
+        <input type="checkbox" [value]="plat.idPlatform" [(ngModel)]="selectedPlatformIds" name="platforms">
+        {{ plat.name }}
+      </div>
+      @if (myForm.controls['platforms'].hasError('required') && myForm.controls['platforms'].touched) {
+        <span class="text-danger">Au moins une plateforme est requise</span>
+      }
+    </div>
+    
     <div class="mt-2">
       <button type="submit" (click)="addGame()" class="btn btn-success">Ajouter</button>
     </div>

@@ -1,0 +1,32 @@
+<div class="container">
+  <h2 class="text-center mb-4">Ma Bibliothèque de Jeux</h2>
+
+  <div *ngIf="games.length === 0" class="alert alert-info">
+    Aucun jeu dans votre bibliothèque.
+  </div>
+
+  <table class="table table-hover" *ngIf="games.length > 0">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Genre</th>
+        <th>Prix</th>
+        <th>Date de Sortie</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let game of games">
+        <td>{{ game.nomGame }}</td>
+        <td>{{ game.genre.nomGenre || 'N/A' }}</td>
+        <td>{{ game.prixGame }} €</td>
+        <td>{{ game.datedeSortie | date: 'dd/MM/yyyy' }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="removeFromLibrary(game.idGame)">
+            Retirer
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
