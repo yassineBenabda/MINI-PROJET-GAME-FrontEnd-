@@ -1,7 +1,8 @@
 export class User{ 
-    username!:string ;
-    password !: string ;
-    roles!:string[];
-    email!: string ;
-    enabled!: boolean
+    name?: string ;
+    username?:string ;
+    password?: string ;
+    roles?:string[];
+    email?: string ;
+    enabled?: boolean
 }

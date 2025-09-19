@@ -16,12 +16,12 @@
             Games
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            @if(authService.isAdmin()) {
-            <!-- <li><a class="dropdown-item" routerLink="/addGames">Ajouter des Games</a></li> -->
-            <!-- <li><a class="dropdown-item" routerLink="/addPlatform">Ajouter des Platforms</a></li> -->
-            <!-- <li><a class="dropdown-item" routerLink="/addDeveloper">Ajouter des Developers</a></li> -->
-            }
-            <li> <a class="dropdown-item" routerLink="/games">Lister des Games</a></li>
+            <!-- @if(authService.isAdmin()) {
+            <li><a class="dropdown-item" routerLink="/addGames">Ajouter des Games</a></li>
+            <li><a class="dropdown-item" routerLink="/addPlatform">Ajouter des Platforms</a></li>
+            <li><a class="dropdown-item" routerLink="/addDeveloper">Ajouter des Developers</a></li>
+            } -->
+            <li> <a class="dropdown-item" routerLink="/games" *kaHasRoles="['ADMIN']">Lister des Games</a></li>
             <li> <a class="dropdown-item" routerLink="/developers">Lister des Developers</a></li>
             <li> <a class="dropdown-item" routerLink="/platforms">Lister des Platforms</a></li>
             <li> <a class="dropdown-item" routerLink="/recherche-par-genre">Recherche Par Genre</a></li>
@@ -30,20 +30,19 @@
           </ul>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto m-2">
+      
+      <ul class="navbar-nav ms-auto m-2" >
+        <li> <a routerLink="/profile" class="nav-link dropdown-toggle">MyProfile</a> </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            [{{authService.loggedUser}}]
-          </a>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Connexion
+        </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            @if(!authService.isloggedIn){
-            <li><a class="dropdown-item" routerLink="/login">Login</a></li>
-            }
-            @else {
-            <li><a class="dropdown-item" (click)="onLogout()">Logout</a></li>
-            }
-            <li><a class="dropdown-item">Profile</a></li>
+          @if (!authenticated) {
+          <button class="action-item" (click)="login()">Login</button>
+          } @else {
+          <button class="action-item" (click)="logout()">Logout</button>
+          }
           </ul>
         </li>
       </ul>
