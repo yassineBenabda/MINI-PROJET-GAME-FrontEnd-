@@ -6,10 +6,9 @@ import { Developer } from '../model/developer.model';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-developer',
-  standalone: true,
-  imports: [CommonModule, RouterModule, RouterLink],
-  templateUrl: './developer.component.html',
+    selector: 'app-developer',
+    imports: [CommonModule, RouterModule, RouterLink],
+    templateUrl: './developer.component.html'
 })
 
 export class DeveloperComponent implements OnInit {

@@ -11,10 +11,9 @@ import { DeveloperService } from '../services/developer.service';
 import { PlatformService } from '../services/platform.service';
 
 @Component({
-  selector: 'app-add-games',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, FormsModule],
-  templateUrl: './add-games.component.html'
+    selector: 'app-add-games',
+    imports: [CommonModule, ReactiveFormsModule, RouterModule, FormsModule],
+    templateUrl: './add-games.component.html'
 })
 export class AddGamesComponent implements OnInit {
   myForm!: FormGroup;

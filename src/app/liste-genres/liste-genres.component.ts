@@ -6,10 +6,9 @@ import { UpdateGenresComponent } from '../update-genres/update-genres.component'
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-liste-genres',
-  standalone: true,
-  imports: [CommonModule,UpdateGenresComponent,RouterLink],
-  templateUrl: './liste-genres.component.html'
+    selector: 'app-liste-genres',
+    imports: [CommonModule, UpdateGenresComponent, RouterLink],
+    templateUrl: './liste-genres.component.html'
 })
 export class ListeGenresComponent implements OnInit {
 

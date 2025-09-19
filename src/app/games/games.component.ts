@@ -7,10 +7,9 @@ import { RouterModule } from '@angular/router';
 import { BibliothequeService } from '../services/bibliotheque.service';
 
 @Component({
-  selector: 'app-games',
-  standalone: true,
-  imports: [CommonModule,RouterModule],
-  templateUrl: './games.component.html'
+    selector: 'app-games',
+    imports: [CommonModule, RouterModule],
+    templateUrl: './games.component.html'
 })
 export class GamesComponent implements OnInit {
 

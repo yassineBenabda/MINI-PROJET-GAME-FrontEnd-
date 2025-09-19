@@ -6,10 +6,9 @@ import { GameService } from '../services/game.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-recherche-par-genre',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './recherche-par-genre.component.html'
+    selector: 'app-recherche-par-genre',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './recherche-par-genre.component.html'
 })
 export class RechercheParGenreComponent implements OnInit {
   games!: Game[];

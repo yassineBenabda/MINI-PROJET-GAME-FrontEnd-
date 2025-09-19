@@ -6,10 +6,9 @@ import { Platform } from '../model/platform.model';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-platform',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './platform.component.html'
+    selector: 'app-platform',
+    imports: [CommonModule, RouterModule],
+    templateUrl: './platform.component.html'
 })
 export class PlatformComponent implements OnInit {
   private platformService = inject(PlatformService);

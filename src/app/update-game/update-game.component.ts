@@ -11,10 +11,9 @@ import { DeveloperService } from '../services/developer.service';
 import { PlatformService } from '../services/platform.service';
 
 @Component({
-  selector: 'app-update-game',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
-  templateUrl: './update-game.component.html'
+    selector: 'app-update-game',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+    templateUrl: './update-game.component.html'
 })
 export class UpdateGameComponent implements OnInit {
   currentGame = new Game();

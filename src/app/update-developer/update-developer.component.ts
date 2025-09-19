@@ -6,10 +6,9 @@ import { DeveloperService } from '../services/developer.service';
 import { Developer } from '../model/developer.model';
 
 @Component({
-  selector: 'app-update-developer',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
-  templateUrl: './update-developer.component.html'
+    selector: 'app-update-developer',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+    templateUrl: './update-developer.component.html'
 })
 export class UpdateDeveloperComponent implements OnInit {
   currentDeveloper = new Developer();

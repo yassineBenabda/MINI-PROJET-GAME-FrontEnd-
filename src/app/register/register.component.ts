@@ -12,10 +12,9 @@ import { AuthService } from '../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, RouterLink],
-  templateUrl: './register.component.html',
+    selector: 'app-register',
+    imports: [FormsModule, ReactiveFormsModule, RouterLink],
+    templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit {
   public user = new User();

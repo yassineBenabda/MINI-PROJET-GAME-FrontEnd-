@@ -4,10 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { Genre } from '../model/genre.model';
 
 @Component({
-  selector: 'app-update-genres',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './update-genres.component.html'
+    selector: 'app-update-genres',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './update-genres.component.html'
 })
 export class UpdateGenresComponent implements OnInit {
   @Input() genre!: Genre;

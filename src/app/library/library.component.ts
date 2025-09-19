@@ -4,10 +4,9 @@ import { BibliothequeService } from '../services/bibliotheque.service';
 import { Game } from '../model/game.model';
 
 @Component({
-  selector: 'app-library',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './library.component.html'
+    selector: 'app-library',
+    imports: [CommonModule],
+    templateUrl: './library.component.html'
 })
 export class LibraryComponent implements OnInit {
 

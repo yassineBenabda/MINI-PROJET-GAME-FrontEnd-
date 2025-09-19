@@ -6,10 +6,9 @@ import { PlatformService } from '../services/platform.service';
 import { Platform } from '../model/platform.model';
 
 @Component({
-  selector: 'app-add-platform',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
-  templateUrl: './add-platform.component.html'
+    selector: 'app-add-platform',
+    imports: [CommonModule, ReactiveFormsModule, RouterLink],
+    templateUrl: './add-platform.component.html'
 })
 
   export class AddPlatformComponent implements OnInit {

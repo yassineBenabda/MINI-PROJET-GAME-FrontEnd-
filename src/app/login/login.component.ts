@@ -5,11 +5,10 @@ import { AuthService } from '../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [FormsModule,RouterLink],
-  templateUrl: './login.component.html',
-  styles: ``
+    selector: 'app-login',
+    imports: [FormsModule, RouterLink],
+    templateUrl: './login.component.html',
+    styles: ``
 })
 export class LoginComponent {
 

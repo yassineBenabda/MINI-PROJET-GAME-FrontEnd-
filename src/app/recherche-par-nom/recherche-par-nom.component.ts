@@ -7,10 +7,9 @@ import { SearchFilterPipe } from '../search-filter.pipe';
 
 
 @Component({
-  selector: 'app-recherche-par-nom',
-  standalone: true,
-  imports: [CommonModule, FormsModule,SearchFilterPipe],
-  templateUrl: './recherche-par-nom.component.html'
+    selector: 'app-recherche-par-nom',
+    imports: [CommonModule, FormsModule, SearchFilterPipe],
+    templateUrl: './recherche-par-nom.component.html'
 })
 export class RechercheParNomComponent implements OnInit {
   nomGame!: string;
