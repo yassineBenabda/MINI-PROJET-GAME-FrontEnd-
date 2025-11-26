@@ -21,7 +21,16 @@
             <li><a class="dropdown-item" routerLink="/addPlatform">Ajouter des Platforms</a></li>
             <li><a class="dropdown-item" routerLink="/addDeveloper">Ajouter des Developers</a></li>
             } -->
-            <li> <a class="dropdown-item" routerLink="/games" *kaHasRoles="['ADMIN']">Lister des Games</a></li>
+            <li *kaHasRoles="['ADMIN']">
+                <a class="dropdown-item" routerLink="/addGames">Ajouter des Games</a>
+            </li>
+            <li *kaHasRoles="['ADMIN']">
+                <a class="dropdown-item" routerLink="/addPlatform">Ajouter des Platforms</a>
+            </li>
+            <li *kaHasRoles="['ADMIN']">
+                <a class="dropdown-item" routerLink="/addDeveloper">Ajouter des Developers</a>
+            </li>
+            <li> <a class="dropdown-item" routerLink="/games" *kaHasRoles="['ADMIN', 'USER']">Lister des Games</a></li>
             <li> <a class="dropdown-item" routerLink="/developers">Lister des Developers</a></li>
             <li> <a class="dropdown-item" routerLink="/platforms">Lister des Platforms</a></li>
             <li> <a class="dropdown-item" routerLink="/recherche-par-genre">Recherche Par Genre</a></li>

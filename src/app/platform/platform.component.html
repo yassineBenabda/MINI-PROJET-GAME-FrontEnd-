@@ -11,7 +11,7 @@
               <th>Id</th>
               <th>Nom</th>
               <th>Fabricant</th>
-              <th colspan="2" *ngIf="authService.isAdmin()">Actions</th>
+              <th colspan="2" *kaHasRoles="['ADMIN']">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -21,14 +21,22 @@
                 <td>{{ p.name }}</td>
                 <td>{{ p.manufacturer }}</td>
   
-                @if (authService.isAdmin()) {
+                <!-- @if (authService.isAdmin()) {
                   <td>
                     <button class="btn btn-danger" (click)="supprimerPlatform(p)">Supprimer</button>
                   </td>
                   <td>
                     <a class="btn btn-success" [routerLink]="['/updatePlatform', p.idPlatform]">Modifier</a>
                   </td>
-                }
+                } -->
+                  <ng-container *kaHasRoles="['ADMIN']">
+                    <td>
+                      <button class="btn btn-danger" (click)="supprimerPlatform(p)">Supprimer</button>
+                    </td>
+                    <td>
+                      <a class="btn btn-success" [routerLink]="['/updatePlatform', p.idPlatform]">Modifier</a>
+                    </td>
+                  </ng-container>
               </tr>
             }
           </tbody>

@@ -11,7 +11,8 @@
             <th>Id</th>
             <th>Nom</th>
             <th>Pays</th>
-            <th colspan="2" *ngIf="authService.isAdmin()">Actions</th>
+            <!-- <th colspan="2" *ngIf="authService.isAdmin()">Actions</th> -->
+            <th colspan="2" *kaHasRoles="['ADMIN']">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -21,14 +22,22 @@
             <td>{{ dev.name }}</td>
             <td>{{ dev.country }}</td>
 
-            @if (authService.isAdmin()) {
+            <!-- @if (authService.isAdmin()) {
             <td>
               <a class="btn btn-danger" (click)="supprimerDeveloper(dev)">Supprimer</a>
             </td>
             <td>
               <a class="btn btn-success" [routerLink]="['/updateDeveloper', dev.idDeveloper]">Modifier</a>
             </td>
-            }
+            } -->
+            <ng-container *kaHasRoles="['ADMIN']">
+              <td>
+                <a class="btn btn-danger" (click)="supprimerDeveloper(dev)">Supprimer</a>
+              </td>
+              <td>
+                <a class="btn btn-success" [routerLink]="['/updateDeveloper', dev.idDeveloper]">Modifier</a>
+              </td>
+            </ng-container>
           </tr>
           }
         </tbody>

@@ -5,10 +5,11 @@ import { GameService } from '../services/game.service';
 import { AuthService } from '../services/auth.service';
 import { RouterModule } from '@angular/router';
 import { BibliothequeService } from '../services/bibliotheque.service';
+import { HasRolesDirective } from 'keycloak-angular';
 
 @Component({
     selector: 'app-games',
-    imports: [CommonModule, RouterModule],
+    imports: [CommonModule, RouterModule, HasRolesDirective],
     templateUrl: './games.component.html'
 })
 export class GamesComponent implements OnInit {

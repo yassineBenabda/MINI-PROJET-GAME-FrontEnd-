@@ -15,24 +15,35 @@ const isAccessAllowed = async (
 ): Promise<boolean | UrlTree> => {
     const { authenticated, grantedRoles } = authData;
 
+    const requiredRoles = Array.isArray(route.data['role']) 
+        ? route.data['role'] 
+        : [route.data['role']]; 
 
-    const requiredRole = route.data['role'];
-
-
-    if (!requiredRole) {
+    if (!requiredRoles || requiredRoles.length === 0) {
         return false;
     }
+
+    // const requiredRole = route.data['role'];
+
+
+    /* if (!requiredRole) {
+        return false;
+    } */
 
     const hasRequiredRole = (role: string): boolean =>
 
     // Object.values(grantedRoles.realmRoles).some((roles) => roles.includes(role));
        Object.values(grantedRoles.resourceRoles).some((roles) => roles.includes(role));
 
+    const hasAnyRequiredRole = requiredRoles.some(hasRequiredRole);
 
-
-    if (authenticated && hasRequiredRole(requiredRole)) {
+    if (authenticated && hasAnyRequiredRole) {
         return true;
     }
+
+    /* if (authenticated && hasRequiredRole(requiredRole)) {
+        return true;
+    } */
 
     const router = inject(Router);
     return router.parseUrl('/forbidden');

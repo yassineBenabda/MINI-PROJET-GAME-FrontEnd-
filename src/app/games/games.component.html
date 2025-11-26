@@ -15,8 +15,10 @@
             <th>DatedeSortie</th>
             <th>Genre</th>
             <th>E-mail</th>
-            <th colspan="2" *ngIf="authService.isAdmin()">Actions</th>
-            <th *ngIf="!authService.isAdmin()">Ajouter</th>
+            <!-- <th colspan="2" *ngIf="authService.isAdmin()">Actions</th> -->
+            <!-- <th *ngIf="!authService.isAdmin()">Ajouter</th> -->
+            <th colspan="2" *kaHasRoles="['ADMIN']">Actions</th> 
+            <th>Ajouter</th> 
           </tr>
   
           @for (game of games; track game.idGame) {
@@ -35,14 +37,14 @@
   
                 <td>{{ game.email }}</td>
   
-                @if (authService.isAdmin()) {
+                <ng-container *kaHasRoles="['ADMIN']">
                   <td>
                     <a class="btn btn-danger" (click)="supprimerGame(game)">Supprimer</a>
                   </td>
                   <td>
                     <a class="btn btn-success" [routerLink]="['/updateGame', game.idGame]">Modifier</a>
                   </td>
-                }
+                </ng-container>
 
                 <td>
                   <a class="btn btn-warning" (click)="addToLibrary(game)">Ajouter à la bibliothèque</a>
@@ -56,4 +58,3 @@
       </div>
     </div>
   </div>
-  

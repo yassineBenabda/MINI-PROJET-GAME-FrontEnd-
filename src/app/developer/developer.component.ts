@@ -4,10 +4,11 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { DeveloperService } from '../services/developer.service';
 import { Developer } from '../model/developer.model';
 import { AuthService } from '../services/auth.service';
+import { HasRolesDirective } from 'keycloak-angular';
 
 @Component({
     selector: 'app-developer',
-    imports: [CommonModule, RouterModule, RouterLink],
+    imports: [CommonModule, RouterModule, RouterLink, HasRolesDirective],
     templateUrl: './developer.component.html'
 })
 

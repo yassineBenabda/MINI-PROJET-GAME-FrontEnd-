@@ -4,10 +4,11 @@ import { RouterModule } from '@angular/router';
 import { PlatformService } from '../services/platform.service';
 import { Platform } from '../model/platform.model';
 import { AuthService } from '../services/auth.service';
+import { HasRolesDirective } from 'keycloak-angular';
 
 @Component({
     selector: 'app-platform',
-    imports: [CommonModule, RouterModule],
+    imports: [CommonModule, RouterModule, HasRolesDirective],
     templateUrl: './platform.component.html'
 })
 export class PlatformComponent implements OnInit {
